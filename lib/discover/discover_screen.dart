@@ -1,8 +1,9 @@
+import 'package:filmflowapp/widgets/custom_button_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:filmflowapp/themes/app_theme.dart';
 
 class DiscoverScreen extends StatefulWidget {
-  const DiscoverScreen({Key? key}) : super(key: key);
+  const DiscoverScreen({super.key});
 
   @override
   State<DiscoverScreen> createState() => _DiscoverScreenState();
@@ -47,31 +48,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        selectedItemColor: AppColors.imdbYellow,
-        unselectedItemColor: Colors.white,
+      bottomNavigationBar: CustomBottomNav(
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Browser',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.video_library),
-            label: 'Discover',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
-          ),
-        ],
+        onItemTapped: _onItemTapped,
       ),
     );
   }

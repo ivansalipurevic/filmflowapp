@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:filmflowapp/themes/app_theme.dart';
 
 class VerifyScreen extends StatelessWidget {
-  const VerifyScreen({Key? key}) : super(key: key);
+  const VerifyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'forgot_password.dart';
 import 'signup_screen.dart';
 
 class IMDbLoginScreen extends StatefulWidget {
-  const IMDbLoginScreen({Key? key}) : super(key: key);
+  const IMDbLoginScreen({super.key});
 
   @override
   State<IMDbLoginScreen> createState() => _IMDbLoginScreenState();

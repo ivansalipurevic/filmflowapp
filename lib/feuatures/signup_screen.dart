@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:filmflowapp/themes/app_theme.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:url_launcher/url_launcher.dart';
 
 class IMDbSignUpScreen extends StatefulWidget {
-  const IMDbSignUpScreen({Key? key}) : super(key: key);
+  const IMDbSignUpScreen({super.key});
 
   @override
   State<IMDbSignUpScreen> createState() => _IMDbSignUpScreenState();
@@ -10,6 +13,7 @@ class IMDbSignUpScreen extends StatefulWidget {
 
 class _IMDbSignUpScreenState extends State<IMDbSignUpScreen> {
   bool rememberMe = false;
+  final String apiKey = '342455135665dbab055a0323ea3e9a77';
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +46,49 @@ class _IMDbSignUpScreenState extends State<IMDbSignUpScreen> {
             ),
           ),
           const SizedBox(height: 20),
-          _buildInputField(label: 'Username'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: TextField(
+              decoration: const InputDecoration(
+                labelText: 'Username',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
           const SizedBox(height: 10),
-          _buildInputField(label: 'Email'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: TextField(
+              decoration: const InputDecoration(
+                labelText: 'Email',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
           const SizedBox(height: 10),
-          _buildInputField(label: 'Password', obscure: true),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: TextField(
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: 'Password',
+                border: OutlineInputBorder(),
+                suffixIcon: Icon(Icons.visibility),
+              ),
+            ),
+          ),
           const SizedBox(height: 10),
-          _buildInputField(label: 'Confirm Password', obscure: true),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: TextField(
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: 'Confirm Password',
+                border: OutlineInputBorder(),
+                suffixIcon: Icon(Icons.visibility),
+              ),
+            ),
+          ),
           const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -67,7 +107,6 @@ class _IMDbSignUpScreenState extends State<IMDbSignUpScreen> {
             ),
           ),
           const SizedBox(height: 10),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Material(
@@ -75,7 +114,7 @@ class _IMDbSignUpScreenState extends State<IMDbSignUpScreen> {
               borderRadius: BorderRadius.circular(8),
               child: InkWell(
                 borderRadius: BorderRadius.circular(8),
-                onTap: () {},
+                onTap: signUpWithTMDb, 
                 child: const SizedBox(
                   height: 45,
                   width: double.infinity,
@@ -93,7 +132,6 @@ class _IMDbSignUpScreenState extends State<IMDbSignUpScreen> {
             ),
           ),
           const SizedBox(height: 10),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Row(
@@ -121,7 +159,6 @@ class _IMDbSignUpScreenState extends State<IMDbSignUpScreen> {
                   ),
                 ),
                 const SizedBox(width: 10),
-
                 Expanded(
                   child: Material(
                     color: AppColors.black,
@@ -148,7 +185,6 @@ class _IMDbSignUpScreenState extends State<IMDbSignUpScreen> {
             ),
           ),
           const SizedBox(height: 20),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Row(
@@ -163,7 +199,6 @@ class _IMDbSignUpScreenState extends State<IMDbSignUpScreen> {
             ),
           ),
           const SizedBox(height: 10),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Material(
@@ -191,7 +226,6 @@ class _IMDbSignUpScreenState extends State<IMDbSignUpScreen> {
             ),
           ),
           const SizedBox(height: 30),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Row(
@@ -214,17 +248,39 @@ class _IMDbSignUpScreenState extends State<IMDbSignUpScreen> {
     );
   }
 
-  Widget _buildInputField({required String label, bool obscure = false}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: TextField(
-        obscureText: obscure,
-        decoration: InputDecoration(
-          labelText: label,
-          border: const OutlineInputBorder(),
-          suffixIcon: obscure ? const Icon(Icons.visibility) : null,
-        ),
+  Future<String> createRequestToken() async {
+    final response = await http.get(
+      Uri.parse(
+        'https://api.themoviedb.org/3/authentication/token/new?api_key=$apiKey',
       ),
     );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data['request_token'];
+    } else {
+      throw Exception('Failed to create request token');
+    }
+  }
+
+  Future<void> signUpWithTMDb() async {
+    try {
+      final token = await createRequestToken();
+      print('Request token: $token'); 
+
+      final url = Uri.parse(
+        'https://www.themoviedb.org/authenticate/$token/allow',
+      );
+
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      } else {
+        throw 'Could not launch $url';
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('fail: $e')));
+    }
   }
 }

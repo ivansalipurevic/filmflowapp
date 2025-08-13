@@ -1,8 +1,4 @@
-import 'package:filmflowapp/discover/discover_screen.dart';
-import 'package:filmflowapp/feuatures/login_screen.dart';
-import 'package:filmflowapp/feuatures/reset_password.dart';
-import 'package:filmflowapp/home/home_screen.dart';
-
+import 'package:filmflowapp/filter/filter_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFFF5C518)),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const FilterScreen(),
     );
   }
 }
