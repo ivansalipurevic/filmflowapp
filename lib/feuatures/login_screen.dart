@@ -1,16 +1,18 @@
+import 'package:filmflowapp/core/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:filmflowapp/themes/app_theme.dart';
+
 import 'forgot_password.dart';
 import 'signup_screen.dart';
 
-class IMDbLoginScreen extends StatefulWidget {
-  const IMDbLoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<IMDbLoginScreen> createState() => _IMDbLoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _IMDbLoginScreenState extends State<IMDbLoginScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   bool rememberMe = false;
 
   @override
@@ -35,14 +37,7 @@ class _IMDbLoginScreenState extends State<IMDbLoginScreen> {
             ),
           ),
           const SizedBox(height: 30),
-          const Text(
-            'Sign in',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Roboto',
-            ),
-          ),
+          const Text('Sign in', style: AppTextStyles.appBarTitle),
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -80,7 +75,10 @@ class _IMDbLoginScreenState extends State<IMDbLoginScreen> {
                         });
                       },
                     ),
-                    const Text('Remember Me'),
+                    const Text(
+                      'Remember Me',
+                      style: AppTextStyles.listTileTitle,
+                    ),
                   ],
                 ),
                 TextButton(
@@ -94,15 +92,16 @@ class _IMDbLoginScreenState extends State<IMDbLoginScreen> {
                   },
                   child: const Text(
                     'Forgot password?',
-                    style: TextStyle(color: AppColors.black),
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontFamily: 'Roboto',
+                    ),
                   ),
                 ),
               ],
             ),
           ),
           const SizedBox(height: 10),
-
-          // Zamena ElevatedButton -> Material + InkWell (Login)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Material(
@@ -120,6 +119,7 @@ class _IMDbLoginScreenState extends State<IMDbLoginScreen> {
                       style: TextStyle(
                         color: AppColors.black,
                         fontWeight: FontWeight.w500,
+                        fontFamily: 'Roboto',
                       ),
                     ),
                   ),
@@ -127,7 +127,6 @@ class _IMDbLoginScreenState extends State<IMDbLoginScreen> {
               ),
             ),
           ),
-
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -144,12 +143,11 @@ class _IMDbLoginScreenState extends State<IMDbLoginScreen> {
                     ),
                   ),
                 ),
-                Expanded(child: Divider(color: Colors.black)),
+                Expanded(child: Divider(color: AppColors.black)),
               ],
             ),
           ),
           const SizedBox(height: 20),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Material(
@@ -161,7 +159,7 @@ class _IMDbLoginScreenState extends State<IMDbLoginScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const IMDbSignUpScreen(),
+                      builder: (context) => const SignUpScreen(),
                     ),
                   );
                 },
@@ -174,6 +172,7 @@ class _IMDbLoginScreenState extends State<IMDbLoginScreen> {
                       style: TextStyle(
                         color: AppColors.white,
                         fontWeight: FontWeight.w500,
+                        fontFamily: 'Roboto',
                       ),
                     ),
                   ),
@@ -181,7 +180,6 @@ class _IMDbLoginScreenState extends State<IMDbLoginScreen> {
               ),
             ),
           ),
-
           const SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),

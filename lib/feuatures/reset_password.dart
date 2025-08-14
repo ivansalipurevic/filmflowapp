@@ -1,5 +1,7 @@
+import 'package:filmflowapp/core/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:filmflowapp/themes/app_theme.dart';
+
 
 class ResetPasswordScreen extends StatelessWidget {
   const ResetPasswordScreen({super.key});
@@ -33,11 +35,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 children: [
                   const Text(
                     'Reset Password',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: 'Roboto',
-                    ),
+                    style: AppTextStyles.appBarTitle,
                   ),
                   const SizedBox(height: 20),
                   _buildPasswordField('New Password'),
@@ -59,6 +57,7 @@ class ResetPasswordScreen extends StatelessWidget {
                             style: TextStyle(
                               color: AppColors.white,
                               fontWeight: FontWeight.w600,
+                              fontFamily: 'Roboto',
                             ),
                           ),
                         ),
@@ -72,14 +71,17 @@ class ResetPasswordScreen extends StatelessWidget {
                     },
                     style: OutlinedButton.styleFrom(
                       minimumSize: const Size.fromHeight(45),
-                      side: const BorderSide(color: Colors.black),
+                      side: const BorderSide(color: AppColors.black),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
                     child: const Text(
                       'Back',
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontFamily: 'Roboto',
+                      ),
                     ),
                   ),
                   const SizedBox(height: 30),
@@ -90,11 +92,19 @@ class ResetPasswordScreen extends StatelessWidget {
                       children: const [
                         Text(
                           'Conditions of Use',
-                          style: TextStyle(fontSize: 12, color: AppColors.grey),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: AppColors.grey,
+                            fontFamily: 'Roboto',
+                          ),
                         ),
                         Text(
                           'Privacy Notice',
-                          style: TextStyle(fontSize: 12, color: AppColors.grey),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: AppColors.grey,
+                            fontFamily: 'Roboto',
+                          ),
                         ),
                       ],
                     ),

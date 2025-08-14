@@ -1,3 +1,4 @@
+import 'package:filmflowapp/widgets/filter_options_list.dart';
 import 'package:flutter/material.dart';
 
 class FilterScreen extends StatefulWidget {
@@ -64,63 +65,12 @@ class _FilterScreenState extends State<FilterScreen> {
             ),
             const SizedBox(height: 16),
 
-            
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Genre",
-                style: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text("All", style: TextStyle(color: Colors.grey)),
-                  SizedBox(width: 8),
-                  Icon(Icons.chevron_right),
-                ],
-              ),
-              onTap: () {},
-            ),
-
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Country",
-                style: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text("All", style: TextStyle(color: Colors.grey)),
-                  SizedBox(width: 8),
-                  Icon(Icons.chevron_right),
-                ],
-              ),
-              onTap: () {},
-            ),
-
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Rating",
-                style: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text("All", style: TextStyle(color: Colors.grey)),
-                  SizedBox(width: 8),
-                  Icon(Icons.chevron_right),
-                ],
-              ),
-              onTap: () {},
-            ),
+            const FilterOptionsList(),
 
             const SizedBox(height: 16),
             const Text("Year", style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
 
-            
             Wrap(
               spacing: 8,
               children: List.generate(years.length, (index) {

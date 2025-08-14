@@ -1,4 +1,3 @@
-import 'package:filmflowapp/widgets/custom_button_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:filmflowapp/themes/app_theme.dart';
 
@@ -10,25 +9,20 @@ class DiscoverScreen extends StatefulWidget {
 }
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
-  int _selectedIndex = 2;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    
+    final double topPadding = MediaQuery.of(context).padding.top + 16;
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Column(
         children: [
           Container(
             color: AppColors.imdbYellow,
-            padding: const EdgeInsets.only(top: 50, bottom: 20, left: 16), 
+            padding: EdgeInsets.only(top: topPadding, bottom: 20, left: 16),
             width: double.infinity,
-            alignment: Alignment.topLeft, 
+            alignment: Alignment.topLeft,
             child: const Text(
               'Discover',
               style: TextStyle(
@@ -47,10 +41,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: CustomBottomNav(
-        currentIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
       ),
     );
   }
