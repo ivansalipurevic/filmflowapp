@@ -1,3 +1,4 @@
+import 'package:filmflowapp/core/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:filmflowapp/themes/app_theme.dart';
 
@@ -27,27 +28,19 @@ class VerifyScreen extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-                vertical: 24.0,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text(
                     'Verify email address',
-                    style: TextStyle(
-                      color: AppColors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: 'Roboto',
-                    ),
+                    style: AppTextStyles.appBarTitle,
                   ),
                   const SizedBox(height: 12),
                   const Text(
                     'To verify your email, We have sent a one Time Password \n'
                     '(OTP) to abc123@gmail.com',
-                    style: TextStyle(fontSize: 14),
+                    style: TextStyle(fontSize: 14, fontFamily: 'Roboto'),
                   ),
                   const SizedBox(height: 24),
                   TextField(
@@ -60,8 +53,6 @@ class VerifyScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 24),
-
-                  // Continue Button using Material + InkWell
                   Material(
                     color: AppColors.black,
                     borderRadius: BorderRadius.circular(8),
@@ -77,15 +68,14 @@ class VerifyScreen extends StatelessWidget {
                             style: TextStyle(
                               color: AppColors.white,
                               fontWeight: FontWeight.w600,
+                              fontFamily: 'Roboto',
                             ),
                           ),
                         ),
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 12),
-
                   OutlinedButton(
                     onPressed: () {
                       Navigator.pop(context);
@@ -96,21 +86,22 @@ class VerifyScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    child: const Text('Resend OTP'),
+                    child: const Text(
+                      'Resend OTP',
+                      style: TextStyle(fontFamily: 'Roboto', color: AppColors.black),
+                    ),
                   ),
-
                   const SizedBox(height: 48),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       Text(
                         'Conditions of Use',
-                        style: TextStyle(fontSize: 12, color: AppColors.grey),
+                        style: TextStyle(fontSize: 12, color: AppColors.grey, fontFamily: 'Roboto'),
                       ),
                       Text(
                         'Privacy Notice',
-                        style: TextStyle(fontSize: 12, color: AppColors.grey),
+                        style: TextStyle(fontSize: 12, color: AppColors.grey, fontFamily: 'Roboto'),
                       ),
                     ],
                   ),
