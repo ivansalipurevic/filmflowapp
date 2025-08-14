@@ -2,14 +2,14 @@ import 'package:filmflowapp/widgets/custom_button_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:filmflowapp/themes/app_theme.dart';
 
-class RatingScreen extends StatefulWidget {
-  const RatingScreen({super.key});
+class MovieParentGuideScreen extends StatefulWidget {
+  const MovieParentGuideScreen({super.key});
 
   @override
-  State<RatingScreen> createState() => _RatingScreenState();
+  State<MovieParentGuideScreen> createState() => _MovieParentGuideScreenState();
 }
 
-class _RatingScreenState extends State<RatingScreen> {
+class _MovieParentGuideScreenState extends State<MovieParentGuideScreen> {
   int _selectedIndex = 2;
 
   void _onItemTapped(int index) {
@@ -17,6 +17,7 @@ class _RatingScreenState extends State<RatingScreen> {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +40,7 @@ class _RatingScreenState extends State<RatingScreen> {
                 ),
                 const SizedBox(width: 4),
                 const Text(
-                  'Rating & Reviews',
+                  'Parent Guide',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,

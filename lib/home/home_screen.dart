@@ -1,91 +1,79 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:filmflowapp/themes/app_theme.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 2;
+  final String apiKey = '342455135665dbab055a0323ea3e9a77';
+  List movies = [];
+  bool isLoading = true;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  @override
+  void initState() {
+    super.initState();
+    fetchMovies();
+  }
+
+  Future<void> fetchMovies() async {
+    final url =
+        'https://api.themoviedb.org/3/movie/popular?api_key=$apiKey&language=en-US&page=1';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          movies = data['results'];
+          isLoading = false;
+        });
+      } else {
+        throw Exception('Failed to load movies');
+      }
+    } catch (e) {
+      print('Error fetching movies: $e');
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
-      body: Column(
-        children: [
-          Container(
-            color: AppColors.imdbYellow,
-            padding: const EdgeInsets.only(top: 50, bottom: 20, left: 16, right: 16),
-            width: double.infinity,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'IMDb',
-                  style: TextStyle(
-                    fontFamily: 'Impact',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: AppColors.black,
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.notifications_rounded),
-                  color: AppColors.black,
-                  iconSize: 28,
-                  onPressed: () {
-                    
+      appBar: AppBar(
+        title: const Text('Popular Movies'),
+        backgroundColor: Colors.redAccent,
+      ),
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : movies.isEmpty
+              ? const Center(child: Text('No movies found'))
+              : ListView.builder(
+                  itemCount: movies.length,
+                  itemBuilder: (context, index) {
+                    final movie = movies[index];
+                    final posterPath = movie['poster_path'];
+                    final title = movie['title'] ?? 'No title';
+
+                    return ListTile(
+                      leading: posterPath != null
+                          ? Image.network(
+                              'https://image.tmdb.org/t/p/w200$posterPath',
+                              fit: BoxFit.cover,
+                            )
+                          : const Icon(Icons.movie),
+                      title: Text(title),
+                      subtitle: Text(
+                          'Rating: ${movie['vote_average']?.toString() ?? 'N/A'}'),
+                    );
                   },
                 ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Center(
-              child: Text(
-                'Infinite Scrolling',
-                style: TextStyle(fontSize: 18, color: Colors.grey),
-              ),
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        selectedItemColor: AppColors.imdbYellow,
-        unselectedItemColor: Colors.white,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Browser',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.video_library),
-            label: 'Discover',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
-          ),
-        ],
-      ),
     );
   }
 }

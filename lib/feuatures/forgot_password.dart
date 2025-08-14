@@ -1,8 +1,9 @@
+import 'package:filmflowapp/core/constants/app_text_styles.dart';
 import 'package:filmflowapp/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
-  const ForgotPasswordScreen({Key? key}) : super(key: key);
+  const ForgotPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
             ),
           ),
+
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -36,18 +38,14 @@ class ForgotPasswordScreen extends StatelessWidget {
                 children: [
                   const Text(
                     'Forgot Password',
-                    style: TextStyle(
-                      color: AppColors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: 'Roboto',
-                    ),
+                    style: AppTextStyles.appBarTitle,
                   ),
                   const SizedBox(height: 12),
                   const Text(
                     'To reset your email, please enter a valid email to send\n'
                     'the reset password link.',
-                    style: TextStyle(fontSize: 14),
+                    style: AppTextStyles.sectionTitle, // koristi AppTextStyles
+                    textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 24),
                   TextField(
@@ -60,6 +58,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 24),
+
                   Material(
                     color: AppColors.black,
                     borderRadius: BorderRadius.circular(8.0),
@@ -75,14 +74,15 @@ class ForgotPasswordScreen extends StatelessWidget {
                             style: TextStyle(
                               color: AppColors.white,
                               fontWeight: FontWeight.w500,
+                              fontFamily: 'Roboto',
                             ),
                           ),
                         ),
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 12),
+
                   OutlinedButton(
                     onPressed: () {
                       Navigator.pop(context);
@@ -93,19 +93,36 @@ class ForgotPasswordScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    child: const Text('Back'),
+                    child: const Text(
+                      'Back',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.black,
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 48),
+
+                  const Spacer(),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       Text(
                         'Conditions of Use',
-                        style: TextStyle(fontSize: 12, color: AppColors.grey),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppColors.grey,
+                          fontFamily: 'Roboto',
+                        ),
                       ),
                       Text(
                         'Privacy Notice',
-                        style: TextStyle(fontSize: 12, color: AppColors.grey),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppColors.grey,
+                          fontFamily: 'Roboto',
+                        ),
                       ),
                     ],
                   ),
