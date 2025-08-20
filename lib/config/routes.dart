@@ -1,7 +1,9 @@
+import 'package:filmflowapp/auth_service.dart';
+import 'package:filmflowapp/home/home_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:filmflowapp/2_application/sign_up/sign_up_cubit.dart';
-import 'package:filmflowapp/feuatures/signup_screen.dart';
-import 'package:filmflowapp/notification/notification_screen.dart';
+import 'package:filmflowapp/auth/cubit/auth_cubit.dart';
+import 'package:filmflowapp/auth/signup_screen.dart';
+
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -9,12 +11,11 @@ class Routes {
   static const String home = '/home';
 
   static Map<String, WidgetBuilder> getRoutes() {
-    const String apiKey = 'd361a354bd2a8a9e746baa02f5a5c454';
 
     return {
       signup: (context) => BlocProvider(
-        create: (_) => SignUpCubit(apiKey: apiKey),
-        child: const SignUpScreen(),
+        create: (_) => AuthCubit(AuthService()),
+        child:  SignUpScreen(),
       ),
       home: (context) => const HomeScreen(),
     };

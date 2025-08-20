@@ -1,3 +1,4 @@
+
 import 'package:filmflowapp/widgets/filter_options_list.dart';
 import 'package:flutter/material.dart';
 
@@ -35,6 +36,12 @@ class _FilterScreenState extends State<FilterScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -91,7 +98,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   labelStyle: TextStyle(
                     color: isSelected ? Colors.white : Colors.black,
                   ),
-                  backgroundColor: Colors.grey[300],
+                  backgroundColor: Colors.grey,
                 );
               }),
             ),

@@ -1,3 +1,4 @@
+import 'package:filmflowapp/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:filmflowapp/themes/app_theme.dart';
 
@@ -11,7 +12,6 @@ class DiscoverScreen extends StatefulWidget {
 class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
   Widget build(BuildContext context) {
-    
     final double topPadding = MediaQuery.of(context).padding.top + 16;
 
     return Scaffold(
@@ -20,16 +20,34 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
         children: [
           Container(
             color: AppColors.imdbYellow,
-            padding: EdgeInsets.only(top: topPadding, bottom: 20, left: 16),
+            padding: EdgeInsets.only(
+              top: topPadding,
+              bottom: 20,
+              left: 16,
+              right: 16,
+            ),
             width: double.infinity,
-            alignment: Alignment.topLeft,
-            child: const Text(
-              'Discover',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-                color: AppColors.black,
-              ),
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back, color: AppColors.black),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => const HomeScreen()),
+                    );
+                  },
+                ),
+                const SizedBox(width: 8),
+                const Text(
+                  'Discover',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                    color: AppColors.black,
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(

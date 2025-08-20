@@ -1,14 +1,15 @@
+import 'package:filmflowapp/widgets/custom_button_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:filmflowapp/themes/app_theme.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class NotificationScreen extends StatefulWidget {
+  const NotificationScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<NotificationScreen> createState() => _NotificationScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _NotificationScreenState extends State<NotificationScreen> {
   int _selectedIndex = 2;
 
   void _onItemTapped(int index) {
@@ -25,27 +26,30 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Container(
             color: AppColors.imdbYellow,
-            padding: const EdgeInsets.only(top: 50, bottom: 20, left: 16, right: 16),
+            padding: const EdgeInsets.only(
+              top: 50,
+              bottom: 20,
+              left: 16,
+              right: 16,
+            ),
             width: double.infinity,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  'IMDb!',
+                  'Notifications',
                   style: TextStyle(
-                    fontFamily: 'Impact',
+                    fontFamily: 'Robot',
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 24,
                     color: AppColors.black,
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.notifications_rounded),
+                  icon: const Icon(Icons.settings),
                   color: AppColors.black,
                   iconSize: 28,
-                  onPressed: () {
-                    
-                  },
+                  onPressed: () {},
                 ),
               ],
             ),
@@ -60,32 +64,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        selectedItemColor: AppColors.imdbYellow,
-        unselectedItemColor: Colors.white,
+ bottomNavigationBar: CustomBottomNav(
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Browser',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.video_library),
-            label: 'Discover',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
-          ),
-        ],
+        onItemTapped: _onItemTapped,
       ),
-    );
+    
+      );
+    
   }
 }

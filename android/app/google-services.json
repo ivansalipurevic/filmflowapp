@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1060542705503",
+    "project_id": "filmflowapp-3e8cb",
+    "storage_bucket": "filmflowapp-3e8cb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060542705503:android:fcf34b5c4127ef3ac110ea",
+        "android_client_info": {
+          "package_name": "com.example.filmappflutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1Z1QxEcMaWuvVfuyuBYtmgDiByso5xUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
