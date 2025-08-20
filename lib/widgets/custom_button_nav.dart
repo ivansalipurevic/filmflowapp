@@ -18,17 +18,13 @@ class CustomBottomNav extends StatelessWidget {
       selectedItemColor: AppColors.imdbYellow,
       unselectedItemColor: Colors.white,
       currentIndex: currentIndex,
-      onTap: onItemTapped,
+      onTap: (index) {
+        onItemTapped(index);
+      },
       type: BottomNavigationBarType.fixed,
       items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Browser',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Browser'),
         BottomNavigationBarItem(
           icon: Icon(Icons.video_library),
           label: 'Discover',

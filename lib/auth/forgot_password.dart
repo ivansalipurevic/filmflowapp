@@ -44,7 +44,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   const Text(
                     'To reset your email, please enter a valid email to send\n'
                     'the reset password link.',
-                    style: AppTextStyles.sectionTitle, // koristi AppTextStyles
+                    style: AppTextStyles.sectionTitle,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 24),

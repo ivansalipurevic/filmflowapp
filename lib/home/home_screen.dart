@@ -1,6 +1,12 @@
-import 'dart:convert';
+import 'package:filmflowapp/home/tabs/browser_tab.dart';
+import 'package:filmflowapp/home/tabs/discover_tab.dart';
+import 'package:filmflowapp/home/tabs/home_tab/home_tab.dart';
+import 'package:filmflowapp/home/tabs/profile_tab.dart';
+import 'package:filmflowapp/home/tabs/home_tab/cubit/home_cubit.dart';
+
+import 'package:filmflowapp/widgets/custom_button_nav.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,70 +16,47 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final String apiKey = '342455135665dbab055a0323ea3e9a77';
-  List movies = [];
-  bool isLoading = true;
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    fetchMovies();
-  }
-
-  Future<void> fetchMovies() async {
-    final url =
-        'https://api.themoviedb.org/3/movie/popular?api_key=$apiKey&language=en-US&page=1';
-
-    try {
-      final response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        setState(() {
-          movies = data['results'];
-          isLoading = false;
-        });
-      } else {
-        throw Exception('Failed to load movies');
-      }
-    } catch (e) {
-      print('Error fetching movies: $e');
-      setState(() {
-        isLoading = false;
-      });
-    }
+    context.read<HomeCubit>().fetchMovies();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Popular Movies'),
-        backgroundColor: Colors.redAccent,
-      ),
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : movies.isEmpty
-              ? const Center(child: Text('No movies found'))
-              : ListView.builder(
-                  itemCount: movies.length,
-                  itemBuilder: (context, index) {
-                    final movie = movies[index];
-                    final posterPath = movie['poster_path'];
-                    final title = movie['title'] ?? 'No title';
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        top: false,
+        child: Column(
+          children: [
+            Expanded(
+              child: IndexedStack(
+                children: [
+                  HomeTab(),
+                  BrowserTab(),
+                  DiscoverTab(),
 
-                    return ListTile(
-                      leading: posterPath != null
-                          ? Image.network(
-                              'https://image.tmdb.org/t/p/w200$posterPath',
-                              fit: BoxFit.cover,
-                            )
-                          : const Icon(Icons.movie),
-                      title: Text(title),
-                      subtitle: Text(
-                          'Rating: ${movie['vote_average']?.toString() ?? 'N/A'}'),
-                    );
-                  },
-                ),
+                  ProfileTab(movieId: 175),
+                ],
+                index: _selectedIndex,
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: CustomBottomNav(
+        currentIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+      ),
     );
   }
 }
